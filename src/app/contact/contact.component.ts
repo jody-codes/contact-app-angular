@@ -51,13 +51,14 @@ export class ContactComponent implements OnInit {
   dataList = [
   ];
 
+
 public add(event) {
   var target = event.target || event.srcElement || event.currentTarget;
   var id = target.attributes.id;
   for (let d of this.data) {
     if (d.cell === id.value) {
       console.log(d);
-      this.dataList.unshift({d});
+      this.dataList.unshift(d);
     }
   }
   console.log('total: ' + this.dataList);
