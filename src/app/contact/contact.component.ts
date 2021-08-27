@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import {Observable} from 'rxjs';
+import {Component, OnInit, Output} from '@angular/core';
 import {NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
 import {ContactService} from '../contact.service';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-contact',
@@ -10,16 +10,14 @@ import {ContactService} from '../contact.service';
   providers: [NgbModalConfig, NgbModal]
 })
 export class ContactComponent implements OnInit {
+  faPlus = faPlus;
   public error: string | undefined;
   data: any;
-  gender: any;
   private loading: boolean;
-
   constructor(config: NgbModalConfig,
               private modalService: NgbModal,
               private contactService: ContactService
   ) {
-    // customize default values of modals used by this component tree
     config.backdrop = 'static';
     config.keyboard = false;
   }
