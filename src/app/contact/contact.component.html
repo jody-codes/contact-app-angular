@@ -3,7 +3,7 @@
   <button class="btn btn-md btn-success" (click)="open(content)"><fa-icon [icon]="faPlus"></fa-icon> Tambah</button>
 </nav>
 
-<form [formGroup]="contactForm">
+
 <ng-template #content let-c="close" let-d="dismiss">
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Pilih Kontak</h4>
@@ -13,12 +13,12 @@
   </div>
   <div class="modal-body">
         <div class="form-group" *ngFor="let d of data">
-          <input formControlName="cell" style="border-style: ridge;" action="" (click)="add()">
-          <input type="text" [formControlName]="'cell'" value="{{d.cell}}> <img src="{{d.picture.thumbnail}}" alt=""> {{d.name.first}} {{d.name.last}}
+          <form style="border-style: ridge;" action="" [name]="contactForm" value="{{d.cell}}" (click)="add()">
+            <img src="{{d.picture.thumbnail}}" alt=""> {{d.name.first}} {{d.name.last}}
+          </form>
         </div>
   </div>
 </ng-template>
-</form>
 
 <div class="container">
   <div class="align-content-center m-5">

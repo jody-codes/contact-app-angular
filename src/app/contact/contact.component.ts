@@ -3,7 +3,6 @@ import {NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
 import {ContactService} from '../contact.service';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import {EventEmitter} from 'events';
-import {FormBuilder, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-contact',
@@ -17,10 +16,9 @@ export class ContactComponent implements OnInit {
   data: any;
   dataList: any;
   @Output() selected = new EventEmitter<{key: any, value: any, payload: any}>();
-  public contactForm: FormGroup;
+  contactForm: any;
   private loading: boolean;
-  constructor(private fb: FormBuilder,
-              config: NgbModalConfig,
+  constructor(config: NgbModalConfig,
               private modalService: NgbModal,
               private contactService: ContactService
   ) {
@@ -49,11 +47,6 @@ export class ContactComponent implements OnInit {
     );
   }
 
-private createForm() {
-  this.contactForm = this.fb.group({
-  cell: [''],
-  });
-}
 
 public add() {
     let cell = this.contactForm.value;
