@@ -6,13 +6,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ContactComponent } from './contact/contact.component';
 import {HttpClientModule} from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { SelectModalComponent } from './common/select-modal/select-modal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ContactComponent,
-    SelectModalComponent
+    ContactComponent
   ],
   imports: [
     BrowserModule,
