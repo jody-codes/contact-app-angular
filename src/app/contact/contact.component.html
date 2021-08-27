@@ -3,7 +3,7 @@
   <button class="btn btn-md btn-success" (click)="open(content)"><fa-icon [icon]="faPlus"></fa-icon> Tambah</button>
 </nav>
 
-
+<form [formGroup]="contactForm">
 <ng-template #content let-c="close" let-d="dismiss">
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Pilih Kontak</h4>
@@ -12,17 +12,20 @@
     </button>
   </div>
   <div class="modal-body">
-    <ul>
-      <li *ngFor="let d of data">
-        <div>
-          <form action="">
-            <img src="{{d.picture.thumbnail}}" alt=""> {{d.name.first}} {{d.name.last}}
-          </form>
+        <div class="form-group" *ngFor="let d of data">
+          <input formControlName="cell" style="border-style: ridge;" action="" (click)="add()">
+          <input type="text" [formControlName]="'cell'" value="{{d.cell}}> <img src="{{d.picture.thumbnail}}" alt=""> {{d.name.first}} {{d.name.last}}
         </div>
-      </li>
-    </ul>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Save</button>
   </div>
 </ng-template>
+</form>
+
+<div class="container">
+  <div class="align-content-center m-5">
+  <div class="form-group" *ngFor="let d of dataList">
+    <form style="border-style: ridge;" action="" name="contactList" value="{{d.cell}}" (click)="add()">
+      <img src="{{d.picture.thumbnail}}" alt=""> {{d.name.first}} {{d.name.last}}
+    </form>
+  </div>
+  </div>
+</div>
