@@ -11,11 +11,12 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
   providers: [NgbModalConfig, NgbModal]
 })
 export class ContactComponent implements OnInit {
+  data: any;
+  dataList = [];
+  detailData = [];
+  cell: any;
   faPlus = faPlus;
   public error: string | undefined;
-  data: any;
-  cell: any;
-  contactForm: any;
   private loading: boolean;
   constructor(config: NgbModalConfig,
               private modalService: NgbModal,
@@ -46,9 +47,6 @@ export class ContactComponent implements OnInit {
     );
   }
 
-  dataList = [
-  ];
-
 
 public add(event) {
   var target = event.target || event.srcElement || event.currentTarget;
@@ -69,14 +67,19 @@ public detail(event, templateRef: TemplateRef<any>) {
   console.log(id.value);
   this.dataList.forEach((value, index) => {
     if (value.cell == id.value) {
-      this.dataDetail.splice(value);
-      this.dataDetail.unshift(value);
+      this.detailData.splice(value);
+      this.detailData.unshift(value);
+      // this.mapDetail();
       this.openDetail(templateRef);
     }
   });
 }
 
-dataDetail = [];
+// public mapDetail() {
+//   this.detailData.forEach((value, index) => {
+//     this.picture = value.picture.large;
+//   });
+// }
 
 public openDetail(contactDetailModal) {
   this.modalService.open(contactDetailModal);
