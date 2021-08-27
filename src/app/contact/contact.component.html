@@ -13,19 +13,17 @@
   </div>
   <div class="modal-body">
         <div class="form-group" *ngFor="let d of data">
-          <form style="border-style: ridge;" action="" [name]="contactForm" value="{{d.cell}}" (click)="add()">
-            <img src="{{d.picture.thumbnail}}" alt=""> {{d.name.first}} {{d.name.last}}
-          </form>
+            <form style="border-style: ridge;" action="" id="{{d.cell}}" name="contactForm" value="{{d.cell}}" (click)="add($event)">
+              <img src="{{d.picture.thumbnail}}" alt=""> {{d.name.first}} {{d.name.last}}
+            </form>
         </div>
   </div>
 </ng-template>
 
 <div class="container">
   <div class="align-content-center m-5">
-  <div class="form-group" *ngFor="let d of dataList">
-    <form style="border-style: ridge;" action="" name="contactList" value="{{d.cell}}" (click)="add()">
-      <img src="{{d.picture.thumbnail}}" alt=""> {{d.name.first}} {{d.name.last}}
-    </form>
+  <div class="form-group">
   </div>
   </div>
 </div>
+

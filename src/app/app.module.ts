@@ -6,7 +6,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ContactComponent } from './contact/contact.component';
 import {HttpClientModule} from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import {ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,7 +17,6 @@ import {ReactiveFormsModule} from '@angular/forms';
     NgbModule,
     HttpClientModule,
     FontAwesomeModule,
-    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

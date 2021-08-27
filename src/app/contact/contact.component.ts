@@ -3,6 +3,7 @@ import {NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
 import {ContactService} from '../contact.service';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import {EventEmitter} from 'events';
+import {newArray} from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-contact',
@@ -14,7 +15,7 @@ export class ContactComponent implements OnInit {
   faPlus = faPlus;
   public error: string | undefined;
   data: any;
-  dataList: any;
+  cell: any;
   @Output() selected = new EventEmitter<{key: any, value: any, payload: any}>();
   contactForm: any;
   private loading: boolean;
@@ -47,10 +48,19 @@ export class ContactComponent implements OnInit {
     );
   }
 
+  dataList = [
+  ];
 
-public add() {
-    let cell = this.contactForm.value;
-    console.log(cell);
+public add(event) {
+  var target = event.target || event.srcElement || event.currentTarget;
+  var id = target.attributes.id;
+  for (let d of this.data) {
+    if (d.cell === id.value) {
+      console.log(d);
+      this.dataList.unshift({d});
+    }
+  }
+  console.log('total: ' + this.dataList);
 }
 
 }
