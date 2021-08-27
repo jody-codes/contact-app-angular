@@ -1,10 +1,13 @@
 <nav class="navbar navbar-dark bg-dark">
   <a class="navbar-brand">Kelola Kontak</a>
-  <button class="btn btn-md btn-success" (click)="open(content)"><fa-icon [icon]="faPlus"></fa-icon> Tambah</button>
+  <button class="btn btn-md btn-success" (click)="open(contactModal)">
+    <fa-icon [icon]="faPlus"></fa-icon>
+    Tambah
+  </button>
 </nav>
 
 
-<ng-template #content let-c="close" let-d="dismiss">
+<ng-template #contactModal let-c="close" let-d="dismiss">
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Pilih Kontak</h4>
     <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
@@ -12,21 +15,45 @@
     </button>
   </div>
   <div class="modal-body">
-        <div class="form-group" *ngFor="let d of data">
-            <form style="border-style: ridge;" action="" id="{{d.cell}}" (click)="add($event)">
-              <img src="{{d.picture.thumbnail}}" alt=""> {{d.name.first}} {{d.name.last}}
-            </form>
-        </div>
+    <div class="form-group" *ngFor="let d of data">
+      <div style="border-style: ridge;" action="" id="{{d.cell}}" (click)="add($event)">
+        <img src="{{d.picture.thumbnail}}" alt=""> {{d.name.first}} {{d.name.last}}
+      </div>
+    </div>
   </div>
 </ng-template>
 
 <div class="container">
-  <div class="align-content-center m-5">
-  <div class="form-group" *ngFor="let d of dataList">
-    <form style="border-style: ridge;" action="" id="{{d.cell}}">
-      <img src="{{d.picture.thumbnail}}" alt=""> {{d.name.first}} {{d.name.last}}
-    </form>
-  </div>
+  <div class="align-content-center" style="margin-top: 2%">
+    <div *ngFor="let dl of dataList">
+<!--      <div>-->
+        <div style="border-style: ridge;" action="" id="{{dl.cell}}" (click)="detail($event, contactDetailModal)">
+          <img src="{{dl.picture.thumbnail}}" alt=""> {{dl.name.first}} {{dl.name.last}}
+        </div>
+
+<!--        <div class="col-md-2">-->
+<!--          <button class="btn btn-lg btn-danger" style="border-style: ridge;" action="" id="{{dl.cell}}"-->
+<!--                  (click)="delete($event)">-->
+<!--            Delete-->
+<!--          </button>-->
+<!--        </div>-->
+<!--      </div>-->
+
+    </div>
   </div>
 </div>
+
+
+<ng-template #contactDetailModal let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Kontak Detail</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    {{dataDetail.value}}
+  </div>
+</ng-template>
+
 

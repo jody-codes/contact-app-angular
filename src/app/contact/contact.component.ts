@@ -1,9 +1,8 @@
-import {Component, OnInit, Output} from '@angular/core';
+import {Component, OnInit, Output, TemplateRef} from '@angular/core';
 import {NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
 import {ContactService} from '../contact.service';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import {EventEmitter} from 'events';
-import {newArray} from '@angular/compiler/src/util';
+
 
 @Component({
   selector: 'app-contact',
@@ -16,7 +15,6 @@ export class ContactComponent implements OnInit {
   public error: string | undefined;
   data: any;
   cell: any;
-  @Output() selected = new EventEmitter<{key: any, value: any, payload: any}>();
   contactForm: any;
   private loading: boolean;
   constructor(config: NgbModalConfig,
@@ -32,8 +30,8 @@ export class ContactComponent implements OnInit {
     this.fetchContact();
   }
 
-  public open(content): void {
-    this.modalService.open(content);
+  public open(contactModal): void {
+    this.modalService.open(contactModal);
   }
 
   public fetchContact(): void {
@@ -62,6 +60,37 @@ public add(event) {
     }
   }
   console.log('total: ' + this.dataList);
+}
+
+
+public detail(event, templateRef: TemplateRef<any>) {
+  var target = event.target || event.srcElement || event.currentTarget;
+  var id = target.attributes.id;
+  console.log(id.value);
+  this.dataList.forEach((value, index) => {
+    if (value.cell == id.value) {
+      this.dataDetail.splice(value);
+      this.dataDetail.unshift(value);
+      this.openDetail(templateRef);
+    }
+  });
+}
+
+dataDetail = [];
+
+public openDetail(contactDetailModal) {
+  this.modalService.open(contactDetailModal);
+}
+
+public delete(event) {
+  var target = event.target || event.srcElement || event.currentTarget;
+  var id = target.attributes.id;
+  console.log(id.value);
+  this.dataList.forEach((value, index) => {
+    if (value.cell == id.value) {
+      this.dataList.splice(index,1);
+    }
+  });
 }
 
 }
