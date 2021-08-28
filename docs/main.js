@@ -448,6 +448,7 @@ class ContactComponent {
             if (d.cell === id.value) {
                 console.log(d);
                 this.dataList.unshift(d);
+                this.modalService.dismissAll();
             }
         }
         console.log('total: ' + this.dataList);
@@ -460,16 +461,10 @@ class ContactComponent {
             if (value.cell == id.value) {
                 this.detailData.splice(value);
                 this.detailData.unshift(value);
-                // this.mapDetail();
                 this.openDetail(templateRef);
             }
         });
     }
-    // public mapDetail() {
-    //   this.detailData.forEach((value, index) => {
-    //     this.picture = value.picture.large;
-    //   });
-    // }
     openDetail(contactDetailModal) {
         this.modalService.open(contactDetailModal);
     }
