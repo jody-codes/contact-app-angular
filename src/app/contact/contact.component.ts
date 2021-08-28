@@ -1,7 +1,7 @@
 import {Component, OnInit, Output, TemplateRef} from '@angular/core';
 import {NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
 import {ContactService} from '../contact.service';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import {faPlus, faTrash} from '@fortawesome/free-solid-svg-icons';
 
 
 @Component({
@@ -16,8 +16,10 @@ export class ContactComponent implements OnInit {
   detailData = [];
   cell: any;
   faPlus = faPlus;
+  faTrash = faTrash;
   public error: string | undefined;
   private loading: boolean;
+
   constructor(config: NgbModalConfig,
               private modalService: NgbModal,
               private contactService: ContactService
@@ -48,32 +50,32 @@ export class ContactComponent implements OnInit {
   }
 
 
-public add(event) {
-  var target = event.target || event.srcElement || event.currentTarget;
-  var id = target.attributes.id;
-  for (let d of this.data) {
-    if (d.cell === id.value) {
-      console.log(d);
-      this.dataList.unshift(d);
+  public add(event) {
+    var target = event.target || event.srcElement || event.currentTarget;
+    var id = target.attributes.id;
+    for (let d of this.data) {
+      if (d.cell === id.value) {
+        console.log(d);
+        this.dataList.unshift(d);
+      }
     }
+    console.log('total: ' + this.dataList);
   }
-  console.log('total: ' + this.dataList);
-}
 
 
-public detail(event, templateRef: TemplateRef<any>) {
-  var target = event.target || event.srcElement || event.currentTarget;
-  var id = target.attributes.id;
-  console.log(id.value);
-  this.dataList.forEach((value, index) => {
-    if (value.cell == id.value) {
-      this.detailData.splice(value);
-      this.detailData.unshift(value);
-      // this.mapDetail();
-      this.openDetail(templateRef);
-    }
-  });
-}
+  public detail(event, templateRef: TemplateRef<any>) {
+    var target = event.target || event.srcElement || event.currentTarget;
+    var id = target.attributes.id;
+    console.log(id.value);
+    this.dataList.forEach((value, index) => {
+      if (value.cell == id.value) {
+        this.detailData.splice(value);
+        this.detailData.unshift(value);
+        // this.mapDetail();
+        this.openDetail(templateRef);
+      }
+    });
+  }
 
 // public mapDetail() {
 //   this.detailData.forEach((value, index) => {
@@ -81,19 +83,20 @@ public detail(event, templateRef: TemplateRef<any>) {
 //   });
 // }
 
-public openDetail(contactDetailModal) {
-  this.modalService.open(contactDetailModal);
-}
+  public openDetail(contactDetailModal) {
+    this.modalService.open(contactDetailModal);
+  }
 
-public delete(event) {
-  var target = event.target || event.srcElement || event.currentTarget;
-  var id = target.attributes.id;
-  console.log(id.value);
-  this.dataList.forEach((value, index) => {
-    if (value.cell == id.value) {
-      this.dataList.splice(index,1);
-    }
-  });
-}
+  public delete(event) {
+    var target = event.target || event.srcElement || event.currentTarget;
+    var id = target.attributes.id;
+    console.log(id.value);
+    this.dataList.forEach((value, index) => {
+      if (value.cell == id.value) {
+        this.dataList.splice(index, 1);
+        this.modalService.dismissAll();
+      }
+    });
+  }
 
 }

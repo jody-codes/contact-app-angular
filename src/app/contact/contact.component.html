@@ -1,8 +1,7 @@
 <nav class="navbar navbar-dark bg-dark">
   <a class="navbar-brand">Kelola Kontak</a>
-  <button class="btn btn-md btn-success" (click)="open(contactModal)">
+  <button class="btn btn-md btn-success symbol-only" (click)="open(contactModal)">
     <fa-icon [icon]="faPlus"></fa-icon>
-    Tambah
   </button>
 </nav>
 
@@ -26,19 +25,10 @@
 <div class="container">
   <div class="align-content-center" style="margin-top: 2%">
     <div *ngFor="let dl of dataList">
-<!--      <div>-->
-        <div style="border-style: ridge;" action="" id="{{dl.cell}}" (click)="detail($event, contactDetailModal)">
-          <img src="{{dl.picture.thumbnail}}" alt=""> {{dl.name.first}} {{dl.name.last}}
-        </div>
-
-<!--        <div class="col-md-2">-->
-<!--          <button class="btn btn-lg btn-danger" style="border-style: ridge;" action="" id="{{dl.cell}}"-->
-<!--                  (click)="delete($event)">-->
-<!--            Delete-->
-<!--          </button>-->
-<!--        </div>-->
-<!--      </div>-->
-
+      <div style="border-style: ridge; margin-top: 10px" action="" id="{{dl.cell}}"
+           (click)="detail($event, contactDetailModal)">
+        <img src="{{dl.picture.thumbnail}}" alt=""> {{dl.name.first}} {{dl.name.last}}
+      </div>
     </div>
   </div>
 </div>
@@ -52,17 +42,72 @@
     </button>
   </div>
   <div class="modal-body">
-    <img src="{{detailData[0].picture.large}}" alt="">
-    <div class="card" style="width: 18rem;">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <a href="#" class="card-link">Card link</a>
-        <a href="#" class="card-link">Another link</a>
+
+    <div class="container">
+      <div class="card-deck">
+        <img class="card-img-top" src="{{detailData[0].picture.large}}" alt="Card image cap">
+        <h5>{{detailData[0].name.first}} {{detailData[0].name.last}}</h5>
+      </div>
+
+
+      <div class="card-deck" style="background-color: #f5f6fa">
+        <div class="card-body">
+          <table class="table-responsive">
+            <tr>
+              <td><p class="card-text">Lahir</p></td>
+              <td><p class="card-text">{{detailData[0].dob.date}}</p></td>
+            </tr>
+            <tr>
+              <td><p class="card-text">Jenis Kelamin</p></td>
+              <td><p class="card-text">{{detailData[0].gender}}</p></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="card-deck" style="background-color: #f5f6fa; margin-top: 10px">
+        <div class="card-body">
+          <table class="table-responsive">
+            <tr>
+              <td><p class="card-text">Surel</p></td>
+              <td><p class="card-text">{{detailData[0].email}}</p></td>
+            </tr>
+            <tr>
+              <td><p class="card-text">Telepon</p></td>
+              <td><p class="card-text">{{detailData[0].phone}}</p></td>
+            </tr>
+            <tr>
+              <td><p class="card-text">Seluler</p></td>
+              <td><p class="card-text">{{detailData[0].cell}}</p></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="card-deck" style="background-color: #f5f6fa; margin-top: 10px">
+        <div class="card-body">
+          <table class="table-responsive">
+            <tr>
+              <td><p class="card-text">Tempat Tinggal</p></td>
+              <td><p
+                class="card-text">{{detailData[0].location.street.name}} {{detailData[0].location.street.number}} {{detailData[0].location.city}} {{detailData[0].location.state}} {{detailData[0].location.postcode}}</p>
+              </td>
+            </tr>
+            <tr>
+              <td><p class="card-text">Koordinat</p></td>
+              <td><p class="card-text">{{detailData[0].location.coordinates.latitude}}
+                , {{detailData[0].location.coordinates.longitude}}</p></td>
+            </tr>
+          </table>
+        </div>
       </div>
     </div>
-
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-md btn-danger" id="{{detailData[0].cell}}" (click)="delete($event)">
+      <fa-icon [icon]="faTrash"></fa-icon>
+      Hapus Kontak
+    </button>
   </div>
 </ng-template>
 
