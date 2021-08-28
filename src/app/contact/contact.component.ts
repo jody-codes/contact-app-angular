@@ -57,6 +57,7 @@ export class ContactComponent implements OnInit {
       if (d.cell === id.value) {
         console.log(d);
         this.dataList.unshift(d);
+        this.modalService.dismissAll();
       }
     }
     console.log('total: ' + this.dataList);
@@ -71,17 +72,11 @@ export class ContactComponent implements OnInit {
       if (value.cell == id.value) {
         this.detailData.splice(value);
         this.detailData.unshift(value);
-        // this.mapDetail();
         this.openDetail(templateRef);
       }
     });
   }
 
-// public mapDetail() {
-//   this.detailData.forEach((value, index) => {
-//     this.picture = value.picture.large;
-//   });
-// }
 
   public openDetail(contactDetailModal) {
     this.modalService.open(contactDetailModal);
